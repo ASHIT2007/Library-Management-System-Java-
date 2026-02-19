@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: head}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{fragments/general :: sidebar}"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <h1 class="h2 mb-4">Dashboard</h1>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Books</h5>
+                            <p class="card-text">View and add new books to the library.</p>
+                            <a href="/books" class="btn btn-light">Go to Books</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Users</h5>
+                            <p class="card-text">Add and manage library members.</p>
+                            <a href="/users" class="btn btn-light">Go to Users</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-warning text-dark">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Borrowings</h5>
+                            <p class="card-text">Issue and return books.</p>
+                            <a href="/borrowings" class="btn btn-dark">Go to Borrowings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="~{fragments/general :: scripts}"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: head}"></head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{fragments/general :: sidebar}"></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                <h1 class="h2">Record Fine</h1>
+            </div>
+            <div class="card col-md-8">
+                <div class="card-body">
+                    <form method="post" th:action="@{/fines/record}">
+                        <div class="mb-3">
+                            <label for="borrowing" class="form-label">Borrowing</label>
+                            <input class="form-control" id="borrowing" name="borrowingId" th:value="${borrowing != null ? borrowing.id : ''}" placeholder="Borrowing ID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user" class="form-label">User</label>
+                            <select class="form-select" id="user" name="userId" required>
+                                <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Amount</label>
+                            <input type="number" step="0.01" min="0" class="form-control" id="amount" name="amount" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Record</button>
+                        <a href="/borrowings" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<div th:replace="~{fragments/general :: scripts}"></div>
+</body>
+</html>

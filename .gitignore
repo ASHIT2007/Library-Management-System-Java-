@@ -1,0 +1,27 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Misc
+*.swp
+*.swo
+.env
+tools/jdk17/
+tools/jdk17.zip

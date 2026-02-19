@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: head}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{fragments/general :: sidebar}"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Borrowing History</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <a href="/borrowings/borrow" class="btn btn-sm btn-outline-primary me-2">
+                        <i class="bi bi-journal-plus"></i> Issue Book
+                    </a>
+                    <a href="/fines/record" class="btn btn-sm btn-outline-warning">
+                        <i class="bi bi-cash-coin"></i> Record Fine
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Book</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="borrowing : ${borrowings}">
+                        <td th:text="${borrowing.id}"></td>
+                        <td th:text="${borrowing.user.name}"></td>
+                        <td th:text="${borrowing.book.title}"></td>
+                        <td th:text="${borrowing.borrowDate}"></td>
+                        <td th:text="${borrowing.returnDate}"></td>
+                        <td th:text="${borrowing.actualReturnDate != null ? borrowing.actualReturnDate : '-'}"></td>
+                        <td>
+                            <span th:text="${borrowing.status}"
+                                  th:class="${borrowing.status == T(com.library.management.model.Borrowing.BorrowStatus).BORROWED} ? 'badge bg-warning' :
+                                           (${borrowing.status == T(com.library.management.model.Borrowing.BorrowStatus).RETURNED} ? 'badge bg-success' : 'badge bg-danger')">
+                            </span>
+                        </td>
+                        <td>
+                            <a th:if="${borrowing.status == T(com.library.management.model.Borrowing.BorrowStatus).BORROWED}"
+                               th:href="@{/borrowings/return/{id}(id=${borrowing.id})}"
+                               class="btn btn-sm btn-success"
+                               onclick="return confirm('Confirm return?')">
+                                Return
+                            </a>
+                            <a th:if="${borrowing.status == T(com.library.management.model.Borrowing.BorrowStatus).BORROWED}"
+                               th:href="@{/borrowings/renew/{id}(id=${borrowing.id})}"
+                               class="btn btn-sm btn-info ms-1">
+                                Renew
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="~{fragments/general :: scripts}"></div>
+</body>
+</html>
